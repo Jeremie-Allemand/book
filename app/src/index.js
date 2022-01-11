@@ -1,23 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MainPage from './pages/MainPage';
+import BookPage from './pages/BookPage';
+import UserPage from './pages/UserPage';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {createStore} from 'redux'
 import { Provider } from 'react-redux';
-import reducer from './reducers/reducer'
-import './styles/index.css';
+// import reducer from './reducers/reducer'
+// import './styles/index.css';
 
-const store = createStore(reducer)
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
+// const store = createStore(reducer)
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
+    {/* <Provider store={store}> */}
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainPage/>}/>
+          <Route path="/book/:isbn" element={<BookPage/>}/>
+          <Route path="/user/:id" element={<UserPage/>}/>
         </Routes>
       </BrowserRouter>
-    </Provider>
+    {/* </Provider> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

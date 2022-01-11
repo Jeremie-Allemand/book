@@ -6,6 +6,6 @@ const PORT = 8080
 app.use(cors())
 app.use(express.json())
 
-require('./routes/chat.route.js')(app)
+require('./routes/user.route.js')(app)
 
 app.listen(PORT, () => console.log(`serveur à l'écoute sur le port ${PORT}`))
