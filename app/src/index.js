@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import MainPage from './pages/MainPage';
 import BookPage from './pages/BookPage';
 import UserPage from './pages/UserPage';
+import ListPage from './pages/ListPage'
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {createStore} from 'redux'
 import { Provider } from 'react-redux';
@@ -24,6 +25,8 @@ ReactDOM.render(
           <Route path="/" element={<MainPage/>}/>
           <Route path="/book/:isbn" element={<BookPage/>}/>
           <Route path="/user/:id" element={<UserPage/>}/>
+          <Route path="/list/:id" element={<ListPage/>}/>
+          
         </Routes>
       </BrowserRouter>
     {/* </Provider> */}

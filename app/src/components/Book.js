@@ -48,15 +48,21 @@ const Book = (props) => {
         }
     ,[bookData.authors])
     
+    
+    const goToBook = () =>{
+        window.open("https://openlibrary.org" + bookData?.key)
+    }
 
-    return (
-        <ListItem secondaryAction={
-            <IconButton>
-                <a href={"https://openlibrary.org" + bookData?.key}><BookIcon/></a> 
-            </IconButton>
-        }>
-            <ListItemText primary={bookData?.title} secondary={authorData?.name} />
-        </ListItem>
-    )
+    if(authorData){
+        return (
+            <ListItem secondaryAction={
+                <IconButton onClick={goToBook}>
+                    <BookIcon/> 
+                </IconButton>
+            }>
+                <ListItemText primary={bookData?.title} secondary={authorData?.name} />
+            </ListItem>
+        )
+    }
 }
 export default Book
