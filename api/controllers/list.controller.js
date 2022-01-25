@@ -1,4 +1,4 @@
-const List = require('../models/List.model')
+const List = require('../models/list.model')
 
 exports.getAllBook = (req,res) => {
     console.log(req)

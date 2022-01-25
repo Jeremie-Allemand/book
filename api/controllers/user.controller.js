@@ -3,17 +3,16 @@ exports.getAllList = (req,res) => {
     console.log(req)
     User.getAllList(req.params.id,(err,data) => {
         if(err)
-            res.status(500).send({message: err.message || `erreur serveur lors de la lecture de ${req.params.nbmsg}  messages`})
+            res.status(500).send({message: err.message || `erreur serveur lors de la lecture des listes`})
         else
             res.send(data)
     })
 }
-
-exports.getAllBook = (req,res) => {
+exports.createList = (req,res) => {
     console.log(req)
-    User.getAllBook(req.params.id,(err,data) => {
+    User.createList(req.body.name,req.body.user,(err,data) => {
         if(err)
-            res.status(500).send({message: err.message || `erreur serveur lors de la lecture de ${req.params.nbmsg}  messages`})
+            res.status(500).send({message: err.message || `erreur serveur lors de la lecture de l'ajout de la list`})
         else
             res.send(data)
     })

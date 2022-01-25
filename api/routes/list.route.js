@@ -1,6 +1,5 @@
 module.exports = (app) => {
-    const userctrl = require('../controllers/user.controller')
-    app.get('/alllist/:id',userctrl.getAllList)
-    app.get('/allbook/:id', userctrl.getAllBook)
+    const listctrl = require('../controllers/list.controller')
+    app.get('/allbook/:id', listctrl.getAllBook)
 
 }

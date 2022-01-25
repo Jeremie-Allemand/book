@@ -16,4 +16,4 @@ List.getAllBook = (id,result) => {
     })
 }
 
-module.exports = User
+module.exports = List

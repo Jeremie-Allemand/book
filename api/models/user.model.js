@@ -21,15 +21,16 @@ User.getAllList = (id,result) => {
     })
 }
 
-User.getAllBook = (id,result) => {
-    const sqlstr = `select list_isbn.isbn from public.list_isbn 
-                        where list_isbn.id_list = ${id}`
-    pool.query(sqlstr, (err,res) => {
+User.createList = (name,id,result) => {
+
+    const sqlstr=`call create_list(${name},${id})`
+    pool.query(sqlstr, (err,res) =>{
         if(err){
             result(err,null)
             return
         }
-        result(null, res.rows)
+        list.id = res.rows[0].id
+        result(null,list)
     })
 }
 
