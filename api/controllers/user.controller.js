@@ -9,8 +9,9 @@ exports.getAllList = (req,res) => {
     })
 }
 exports.createList = (req,res) => {
-    console.log(req)
-    User.createList(req.body.name,req.body.user,(err,data) => {
+    // console.log(req)
+    User.createList(req.body,(err,data) => {
+    // User.createList("Test1",2,(err,data) => {
         if(err)
             res.status(500).send({message: err.message || `erreur serveur lors de la lecture de l'ajout de la list`})
         else

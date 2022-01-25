@@ -21,16 +21,15 @@ User.getAllList = (id,result) => {
     })
 }
 
-User.createList = (name,id,result) => {
+User.createList = (list,result) => {
 
-    const sqlstr=`call create_list(${name},${id})`
+    const sqlstr=`call create_list('${list.name}',${list.creatorId})`
     pool.query(sqlstr, (err,res) =>{
         if(err){
             result(err,null)
             return
         }
-        list.id = res.rows[0].id
-        result(null,list)
+        result(null,list.name)
     })
 }
 
