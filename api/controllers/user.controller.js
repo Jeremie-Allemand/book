@@ -13,7 +13,7 @@ exports.createList = (req,res) => {
     User.createList(req.body,(err,data) => {
     // User.createList("Test1",2,(err,data) => {
         if(err)
-            res.status(500).send({message: err.message || `erreur serveur lors de la lecture de l'ajout de la list`})
+            res.status(500).send({message: err.message || `erreur serveur lors de la creation de la liste`})
         else
             res.send(data)
     })

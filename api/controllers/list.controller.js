@@ -9,3 +9,13 @@ exports.getAllBook = (req,res) => {
             res.send(data)
     })
 }
+
+
+exports.addBook= (req,res) => {
+    List.addBook(req.body,(err,data) => {
+        if(err)
+            res.status(500).send({message: err.message || `erreur serveur lors de l'ajout du livre`})
+        else
+            res.send(data)
+    })
+}

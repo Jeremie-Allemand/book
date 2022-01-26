@@ -29,7 +29,7 @@ User.createList = (list,result) => {
             result(err,null)
             return
         }
-        result(null,list.name)
+        result(null,"Success")
     })
 }
 

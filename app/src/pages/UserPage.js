@@ -10,6 +10,7 @@ const axios = require('axios')
 const UserPage = (props) => {
     const {id} = useParams()
     const [data, setData] = useState([])
+    const [isUpdated, setIsUpdated] = useState(true)
     const [newListName, setNewListName] = useState("")
 
     useEffect(() => {
@@ -17,23 +18,31 @@ const UserPage = (props) => {
             .get("http://localhost:8080/alllist/" + id)
             .then((result) => {
                 setData(result.data)
+                setIsUpdated(true)
             })
             .catch((err) => {
                 console.log(err.message || "API server internal error")
             })
-    },[id])
+    },[id,isUpdated])
     
     const addList = () => {
+        setNewListName("")
         axios
-            .post("http://localhost:8080/newlist/",{
+            .post("http://localhost:8080/createlist/",{
                 name: newListName,
+                creatorId:id
             })
             .then((response) => {
                 console.log(response)
+                setIsUpdated(false)
             })
             .catch((err) => {
                 console.log(err.message || "API server internal error")
             })
+    }
+
+    const handleChange = (event) =>{
+        setNewListName(event.target.value)
     }
 
 
@@ -49,9 +58,17 @@ const UserPage = (props) => {
                     ))}
                     <Grid item xs={2}>
                         <Card>
-                            <IconButton>
-                                <AddIcon/>
-                            </IconButton>
+                            <Stack alignItems="center">
+                                <TextField 
+                                id="standard-basic" 
+                                variant="standard"
+                                value={newListName} 
+                                onChange={handleChange}
+                                />
+                                <IconButton onClick={addList}>
+                                    <AddIcon/>
+                                </IconButton>
+                            </Stack>
                         </Card>
                     </Grid>
                 </Grid>

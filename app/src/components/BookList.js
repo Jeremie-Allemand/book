@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import {useNavigate, useParams} from 'react-router-dom'
 import { useDispatch } from "react-redux";
 import Book from './Book'
 import {List, Card, Typography, Grid,IconButton, Stack} from '@mui/material/';
@@ -8,6 +9,7 @@ const axios = require('axios')
 
 const BookList = (props) => {
 	const [listData, setListData] = useState([])
+		let navigate = useNavigate()
 
 	useEffect(() => {
 		axios
@@ -21,8 +23,9 @@ const BookList = (props) => {
 		}
 	,[props.content.id_list])
 
+	
 	const goToEdit = () => {
-		
+		navigate("/list/" + props.content.id_list)
 	} 
 
 	if(listData){
@@ -30,7 +33,7 @@ const BookList = (props) => {
 		return (
 			<Grid item xs={2}>
 				<Card>
-					<Stack>
+					<Stack alignItems="center">
 						<Typography align="center">{props.content.name}</Typography>
 						<List>
 							{listData.map((item,index) => (
