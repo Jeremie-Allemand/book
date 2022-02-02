@@ -46,7 +46,6 @@ const BookList = (props) => {
 					</Stack>
 				</Card>
 			</Grid>
-							
 		)
 	}else{
 		return(

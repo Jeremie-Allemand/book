@@ -50,7 +50,6 @@ const ListPage = () => {
     }
 
     if(listData){
-        console.log(listData)
         return (
                 <Stack alignItems="center" spacing={2}>
                     {listData.map((item,index) => (
@@ -69,11 +68,6 @@ const ListPage = () => {
                         </IconButton>
                     </Stack>
                 </Stack>
-        )
-    }else{
-        return(
-            <>
-            </>
         )
     }
 }
