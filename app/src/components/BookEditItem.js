@@ -12,13 +12,15 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import BookIcon from '@mui/icons-material/Book';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Card,Paper, Stack } from "@mui/material";
 
 const axios = require('axios')
 
-const Book = (props) => {
+const BookEditItem = (props) => {
     const [bookData, setBookData] = useState([])
     const [authorData, setAuthorData] = useState([])
+    const [isUpdated, setIsUpdated] = useState(true)
 
     useEffect(() => {
         axios
@@ -48,20 +50,34 @@ const Book = (props) => {
     ,[bookData.authors])
     
     
-    const goToBook = () =>{
-        window.open("https://openlibrary.org" + bookData?.key)
+    const deleteBook = () =>{
+        axios
+            .post("http://localhost:8080/removebook/",{
+                isbn: props.isbn,
+            })
+            .then((response) => {
+                console.log(response)
+                setIsUpdated(false)
+            })
+            .catch((err) => {
+                console.log(err.message || "API server internal error")
+            })
     }
 
-    if(authorData){
+    if(authorData && authorData.authors != ""){
         return (
-            <ListItem secondaryAction={
-                <IconButton onClick={goToBook}>
-                    <BookIcon/> 
-                </IconButton>
-            }>
-                <ListItemText primary={bookData?.title} secondary={authorData?.name} />
-            </ListItem>
+            <Card sx={{width: 300}}>
+                <Stack direction="row" alignItems="center">
+                    <Stack>
+                        <Typography>{bookData.title}</Typography>
+                        <Typography>{authorData.name}</Typography>
+                    </Stack>
+                    <IconButton onClick={deleteBook}>
+                        <DeleteIcon/>
+                    </IconButton>
+                </Stack>
+            </Card>
         )
     }
 }
-export default Book
+export default BookEditItem
