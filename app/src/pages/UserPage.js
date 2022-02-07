@@ -45,16 +45,30 @@ const UserPage = (props) => {
         setNewListName(event.target.value)
     }
 
+    const deleteList = (listId) => {
+        axios
+            .post("http://localhost:8080/removelist/",{
+                listId:listId,
+                creatorId:id
+            })
+            .then((response) => {
+                console.log(response)
+                setIsUpdated(false)
+            })
+            .catch((err) => {
+                console.log(err.message || "API server internal error")
+            })
+    }
 
     return (
         <Stack direction="column" spacing={2}>
             <Typography variant="h1" align="center">
-                Jeremie
+               User Page
             </Typography>
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={2}>
                     {data.map((list, index) => (
-                        <BookList key={index} content={list ?? null}/>
+                        <BookList key={index} content={list ?? null} deleteList={deleteList}/>
                     ))}
                     <Grid item xs={2}>
                         <Card>

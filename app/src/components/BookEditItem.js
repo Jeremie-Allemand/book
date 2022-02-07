@@ -20,8 +20,6 @@ const axios = require('axios')
 const BookEditItem = (props) => {
     const [bookData, setBookData] = useState([])
     const [authorData, setAuthorData] = useState([])
-    const [isUpdated, setIsUpdated] = useState(true)
-
     useEffect(() => {
         axios
             .get("https://openlibrary.org/isbn/" + props.isbn+ ".json")
@@ -50,20 +48,6 @@ const BookEditItem = (props) => {
     ,[bookData.authors])
     
     
-    const deleteBook = () =>{
-        axios
-            .post("http://localhost:8080/removebook/",{
-                isbn: props.isbn,
-            })
-            .then((response) => {
-                console.log(response)
-                setIsUpdated(false)
-            })
-            .catch((err) => {
-                console.log(err.message || "API server internal error")
-            })
-    }
-
     if(authorData && authorData.authors != ""){
         return (
             <Card sx={{width: 300}}>
@@ -72,7 +56,7 @@ const BookEditItem = (props) => {
                         <Typography>{bookData.title}</Typography>
                         <Typography>{authorData.name}</Typography>
                     </Stack>
-                    <IconButton onClick={deleteBook}>
+                    <IconButton onClick={() => props.deleteBook(props.isbn)}>
                         <DeleteIcon/>
                     </IconButton>
                 </Stack>

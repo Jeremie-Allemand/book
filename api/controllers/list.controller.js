@@ -19,3 +19,12 @@ exports.addBook= (req,res) => {
             res.send(data)
     })
 }
+
+exports.removeBook= (req,res) => {
+    List.removeBook(req.body,(err,data) => {
+        if(err)
+            res.status(500).send({message: err.message || `erreur serveur lors de l'effacement du livre`})
+        else
+            res.send(data)
+    })
+}

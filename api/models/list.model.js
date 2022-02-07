@@ -22,7 +22,19 @@ List.addBook = (book,result) => {
     const sqlstr=`call add_book(${book.isbn},${book.listId})`
     pool.query(sqlstr, (err,res) =>{
         if(err){
-            result(err,null)
+            result(err,null) 
+            return
+        }
+        result(null,"Success")
+    })
+}
+
+List.removeBook = (book,result) => {
+
+    const sqlstr=`call remove_book(${book.isbn},${book.listId})`
+    pool.query(sqlstr, (err,res) =>{
+        if(err){
+            result(err,null) 
             return
         }
         result(null,"Success")

@@ -33,4 +33,16 @@ User.createList = (list,result) => {
     })
 }
 
+User.removeList= (list,result) => {
+
+    const sqlstr=`call remove_list('${list.listId}',${list.creatorId})`
+    pool.query(sqlstr, (err,res) =>{
+        if(err){
+            result(err,null)
+            return
+        }
+        result(null,"Success")
+    })
+}
+
 module.exports = User

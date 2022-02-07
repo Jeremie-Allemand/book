@@ -18,3 +18,13 @@ exports.createList = (req,res) => {
             res.send(data)
     })
 }
+exports.removeList = (req,res) => {
+    // console.log(req)
+    User.removeList(req.body,(err,data) => {
+    // User.createList("Test1",2,(err,data) => {
+        if(err)
+            res.status(500).send({message: err.message || `erreur serveur lors de la creation de la liste`})
+        else
+            res.send(data)
+    })
+}

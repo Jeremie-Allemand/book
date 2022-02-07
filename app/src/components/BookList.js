@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import Book from './Book'
 import {List, Card, Typography, Grid,IconButton, Stack} from '@mui/material/';
 import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const axios = require('axios')
 
@@ -40,17 +41,17 @@ const BookList = (props) => {
 								<Book isbn={item.isbn} key={index}/>
 							))}
 						</List>
-						<IconButton onClick={goToEdit}>
-							<EditIcon/> 
-						</IconButton>
+						<Stack direction="row">
+							<IconButton onClick={goToEdit}>
+								<EditIcon/> 
+							</IconButton>
+							<IconButton onClick={() => props.deleteList(props.content.id_list)}>
+								<DeleteIcon/> 
+							</IconButton>
+						</Stack>
 					</Stack>
 				</Card>
 			</Grid>
-		)
-	}else{
-		return(
-			<>
-			</>
 		)
 	}
 }

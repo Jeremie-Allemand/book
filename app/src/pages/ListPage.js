@@ -49,11 +49,26 @@ const ListPage = () => {
         
     }
 
+    const deleteBook = (isbnToDelete) =>{
+        axios
+            .post("http://localhost:8080/removebook/",{
+                isbn: isbnToDelete,
+                listId: id
+            })
+            .then((response) => {
+                console.log(response)
+                setIsUpdated(false)
+            })
+            .catch((err) => {
+                console.log(err.message || "API server internal error")
+            })
+    }
+
     if(listData){
         return (
                 <Stack alignItems="center" spacing={2}>
                     {listData.map((item,index) => (
-                        <BookEditItem isbn={item.isbn} key={index}/>
+                        <BookEditItem idList={id} isbn={item.isbn} key={index} deleteBook={deleteBook}/>
                     ))}
 
                     <Stack alignItems="center">
